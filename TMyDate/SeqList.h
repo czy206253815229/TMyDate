@@ -1,3 +1,4 @@
+//！！！！！！！！！！！！！！乏會燕庁医窃！！！！！！！！！！！！！！
 #pragma once
 #include <iostream>
 

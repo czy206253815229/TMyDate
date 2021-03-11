@@ -1,4 +1,4 @@
-//——————————————顺序表模板类——————————————
+//——————————————链表模板类——————————————
 #pragma once
 #include<iostream>
 
@@ -24,58 +24,71 @@ public:
     LinkList(DataType a[], int n);
     //析构函数
     ~LinkList();
+    //创建链表
+    void CreateLinkList(DataType* a[], int n);
     //链表长度
     int Length();
     //按位查找
     DataType Get(int i);
     //按值查找
-    int Locate(DataType x);
+    virtual int Locate(DataType x)  = 0 {};
     //插入
     void Insert(int i, DataType x);
     //删除
     DataType Delete(int i);
     //遍历
     void PrintList();
-private:
-    Node<DataType>* first;
+protected:
+    Node<DataType>* head;
 };
 
 template<class DataType>
 LinkList<DataType>::LinkList()
 {
-    first = new Node<DataType>;
-    first->next = NULL;
+    head = new Node<DataType>;
+    head->next = NULL;
 }
 
 template<class DataType>
 LinkList<DataType>::LinkList(DataType a[], int n)
 {
-    first = new Node<DataType>;
-    first->next = NULL;
-    for (int i = 0; i < n; i++)
-    {
-        Node<DataType>* s = new Node<DataType>;
-        s->data = a[i];
-        s->next = first->next;
-        first->next = s;
-    }
+    CreateLinkList(a, n);
 }
 
 template<class DataType>
 LinkList<DataType>::~LinkList()
 {
-    while (first != NULL)
+    while (head != NULL)
     {
-        Node<DataType>* q = first;
-        first = first->next;
+        Node<DataType>* q = head;
+        head = head->next;
         delete q;
     }
 }
 
 template<class DataType>
+inline void LinkList<DataType>::CreateLinkList(DataType* a[], int n)
+{
+    Node<DataType>* end, * node;
+    head = new Node<DataType>;
+    head->next = NULL;
+    end = head;
+    for (int i = 0; i < n; i++)
+    {
+        node = new Node<DataType>;
+        node->data = *a[i];
+        //cout << a[i];
+        end->next = node;
+        end = node;
+        //cout << end->data;
+    }
+    end->next = NULL;
+}
+
+template<class DataType>
 int LinkList<DataType>::Length()
 {
-    Node<DataType>* p = first->next;
+    Node<DataType>* p = head->next;
     int count = 0;
     while (p != NULL)
     {
@@ -88,7 +101,7 @@ int LinkList<DataType>::Length()
 template<class DataType>
 DataType LinkList<DataType>::Get(int i)
 {
-    Node<DataType>* p = first->next;
+    Node<DataType>* p = head->next;
     int count = 1;
     while (p != NULL && count < i)
     {
@@ -100,23 +113,9 @@ DataType LinkList<DataType>::Get(int i)
 }
 
 template<class DataType>
-int LinkList<DataType>::Locate(DataType x)
-{
-    Node<DataType>* p = first->next;
-    int count = 1;
-    while (p != NULL)
-    {
-        if (p->data == x) return count;
-        p = p->next;
-        count++;
-    }
-    return 0;
-}
-
-template<class DataType>
 void LinkList<DataType>::Insert(int i, DataType x)
 {
-    Node<DataType>* p = first;
+    Node<DataType>* p = head;
     int count = 0;
     while (p != NULL && count < i - 1)
     {
@@ -135,7 +134,7 @@ void LinkList<DataType>::Insert(int i, DataType x)
 template<class DataType>
 DataType LinkList<DataType>::Delete(int i)
 {
-    Node<DataType>* p = first;
+    Node<DataType>* p = head;
     int count = 0;
     while (p != NULL && count < i - 1)
     {
@@ -145,7 +144,7 @@ DataType LinkList<DataType>::Delete(int i)
     if (p == NULL || p->next == NULL) throw "Location";
     else {
         Node<DataType>* q = p->next;
-        int x = q->data;
+        DataType x = q->data;
         p->next = q->next;
         return x;
     }
@@ -154,26 +153,10 @@ DataType LinkList<DataType>::Delete(int i)
 template<class DataType>
 void LinkList<DataType>::PrintList()
 {
-    Node<DataType>* p = first->next;
+    Node<DataType>* p = head->next;
     while (p != NULL)
     {
         cout << p->data << endl;
         p = p->next;
     }
-}
-
-int main()
-{
-    LinkList<int> p;
-    p.Insert(1, 6);
-    p.Insert(2, 9);
-    p.PrintList();
-    p.Insert(2, 3);
-    p.PrintList();
-    cout << p.Get(2) << endl;
-    cout << p.Locate(9) << endl;
-    cout << p.Length() << endl;
-    p.Delete(1);
-    p.PrintList();
-    return 0;
 }

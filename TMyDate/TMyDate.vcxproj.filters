@@ -27,6 +27,9 @@
     <ClCompile Include="TNewDateList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="TNewDateLinkList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TMyDate.h">
@@ -42,6 +45,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="LinkList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TNewDateLinkList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

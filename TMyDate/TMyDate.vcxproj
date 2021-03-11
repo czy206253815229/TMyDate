@@ -142,6 +142,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TMyDate.cpp" />
     <ClCompile Include="TNewDate.cpp" />
+    <ClCompile Include="TNewDateLinkList.cpp" />
     <ClCompile Include="TNewDateList.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="SeqList.h" />
     <ClInclude Include="TMyDate.h" />
     <ClInclude Include="TNewDate.h" />
+    <ClInclude Include="TNewDateLinkList.h" />
     <ClInclude Include="TNewDateList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
