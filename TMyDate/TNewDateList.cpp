@@ -7,6 +7,9 @@ TNewDateList::TNewDateList()
 
 TNewDateList::TNewDateList(TNewDate startTnd, TNewDate endTnd)
 {
+	m_startTnd = startTnd;
+	m_endTnd = endTnd;
+
 	bool flag = false;
 	int count = 0;
 
@@ -47,6 +50,16 @@ TNewDateList::TNewDateList(TNewDate startTnd, TNewDate endTnd)
 TNewDateList::~TNewDateList()
 {
 	delete[] data;
+}
+
+TNewDate TNewDateList::getStartTnd()
+{
+	return m_startTnd;
+}
+
+TNewDate TNewDateList::getEndTnd()
+{
+	return m_endTnd;
 }
 
 int TNewDateList::Locate(TNewDate x)

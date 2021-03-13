@@ -204,25 +204,37 @@ void CountWorkDays(TNewDateList *tndl)
 	int y, m, d;
 	cin >> y >> m >> d;
 	TNewDate tndTemp1 = TNewDate(y, m, d);
+	if (tndTemp1.Interval(tndl->getStartTnd()) > 0)
+	{
+		cout << "输入的起始日期超出范围！";
+		return;
+	}
 	cout << "请输入第二个日期:" << endl;
 	cin >> y >> m >> d;
 	TNewDate tndTemp2 = TNewDate(y, m, d);
-
-	if (tndl->Locate(tndTemp1) == -1 || tndl->Locate(tndTemp2) == -1)
+	if (tndTemp2.Interval(tndl->getEndTnd()) < 0)
 	{
-		cout << "输入了错误的日期，不在列表中" << endl;
+		cout << "输入的结束日期超出范围！";
 		return;
 	}
 	else
 	{
 		int location1, location2;
+		while (!tndTemp1.isWorkDay())
+		{
+			tndTemp1.nextDay();
+		}
+		while (!tndTemp2.isWorkDay())
+		{
+			tndTemp2.frontDay();
+		}
 		location1 = tndl->Locate(tndTemp1);
 		location2 = tndl->Locate(tndTemp2);
 		if (location1 > location2)
 		{
-			cout << "两天之间共有" << location1 - location2 + 1 << "天工作日" << endl;
+			cout << "两天之间没有工作日" << endl;
 		}
-		else 
+		else
 			cout << "两天之间共有" << location2 - location1 + 1 << "天工作日" << endl;
 	}
 }
@@ -233,23 +245,35 @@ void CountWorkDays(TNewDateLinkList* tndl)
 	int y, m, d;
 	cin >> y >> m >> d;
 	TNewDate tndTemp1 = TNewDate(y, m, d);
+	if (tndTemp1.Interval(tndl->getStartTnd()) > 0)
+	{
+		cout << "输入的起始日期超出范围！";
+		return;
+	}
 	cout << "请输入第二个日期:" << endl;
 	cin >> y >> m >> d;
 	TNewDate tndTemp2 = TNewDate(y, m, d);
-
-	if (tndl->Locate(tndTemp1) == -1 || tndl->Locate(tndTemp2) == -1)
+	if (tndTemp2.Interval(tndl->getEndTnd()) < 0)
 	{
-		cout << "输入了错误的日期，不在列表中" << endl;
+		cout << "输入的结束日期超出范围！";
 		return;
 	}
 	else
 	{
 		int location1, location2;
+		while (!tndTemp1.isWorkDay())
+		{
+			tndTemp1.nextDay();
+		}
+		while (!tndTemp2.isWorkDay())
+		{
+			tndTemp2.frontDay();
+		}
 		location1 = tndl->Locate(tndTemp1);
 		location2 = tndl->Locate(tndTemp2);
 		if (location1 > location2)
 		{
-			cout << "两天之间共有" << location1 - location2 + 1 << "天工作日" << endl;
+			cout << "两天之间没有工作日" << endl;
 		}
 		else
 			cout << "两天之间共有" << location2 - location1 + 1 << "天工作日" << endl;
@@ -347,11 +371,11 @@ int main()
 	//第一次作业内容启用此行代码
 	//searchDate();
 
-	//使用链表启用此行代码
-	TNewDateList *tndl = CreateSeqList();
-
 	//使用顺序表启用此行代码
-	//TNewDateLinkList* tndl = CreateLinkList();
+	//TNewDateList *tndl = CreateSeqList();
+
+	//使用链表启用此行代码
+	TNewDateLinkList* tndl = CreateLinkList();
 
 	//此行代码应启用
 	menu(tndl);

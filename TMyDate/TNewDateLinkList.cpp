@@ -7,6 +7,9 @@ TNewDateLinkList::TNewDateLinkList()
 
 TNewDateLinkList::TNewDateLinkList(TNewDate startTnd, TNewDate endTnd)
 {
+	m_startTnd = startTnd;
+	m_endTnd = endTnd;
+
 	bool flag = false;
 	int count = 0;
 
@@ -44,6 +47,16 @@ TNewDateLinkList::TNewDateLinkList(TNewDate startTnd, TNewDate endTnd)
 
 TNewDateLinkList::~TNewDateLinkList()
 {
+}
+
+TNewDate TNewDateLinkList::getStartTnd()
+{
+	return m_startTnd;
+}
+
+TNewDate TNewDateLinkList::getEndTnd()
+{
+	return m_endTnd;
 }
 
 int TNewDateLinkList::Locate(TNewDate x)

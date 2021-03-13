@@ -14,5 +14,11 @@ public:
 	//析构函数
 	~TNewDateList();
 	//重写父类纯虚函数Locate，给出日期（TNewDate）对象，查找在顺序表中的位置
+	TNewDate getStartTnd();
+	TNewDate getEndTnd();
 	int Locate(TNewDate x);
+
+private:
+	TNewDate m_startTnd;
+	TNewDate m_endTnd;
 };
